@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<br>
+<br>
+<br>
+<style>
+   tab {
+    display: inline-block;
+    margin-left: 40px;
+}
+    
+    .container {
+      border: 1px solid #dedede;
+      background-color:darkcyan;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 10px 40px;
+      
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+    
+    .darker {
+      border-color:white;
+      background-color:white;
+    }
+    
+    .container::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    
+    .container img {
+      float: left;
+      max-width: 60px;
+      width: 100%;
+      margin-right: 20px;
+      border-radius: 50%;
+    }
+    
+    .container img.right {
+      float: right;
+      margin-left: 20px;
+      margin-right:0;
+    }
+    
+    .time-right {
+      float: right;
+      color:midnightblue;
+    }
+    
+    .time-left {
+      float: left;
+      color: #999;
+    }
+    </style>
+    </head>
+    <body>
+    
+    <tab><h2 > Messages</h2></tab>
+    
+    {% for msg1 in messages1 %}
+    <hr>
+    <div class="container darker" style=box-shadow:20px;">
+      <img src="/static/assets/images/adminlogo.jpeg" alt="Avatar" class="right" style="width:100%;">
+      <strong><p>{{msg1.notification}}</p></strong>
+      <strong><span class="time-right">{{msg1.notification_time}}</span></strong>
+    </div>
+    <hr>
+    {% endfor %}
+    <br>
+    
+    
+
+
+
+{% endblock %}

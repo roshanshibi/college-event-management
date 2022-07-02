@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<style>
+ 
+
+    /* Full-width input fields */
+    /* 
+    /* Add some hover effects to buttons */
+    
+    
+    
+    
+        /* body {
+          margin: 0;
+          font-family: "Lato", sans-serif;
+          background-color: darkgrey;
+          
+        } */
+
+        tab {
+    display: inline-block;
+    margin-left: 40px;
+}
+
+        div.scroll {
+                    margin:4px, 4px;
+                    padding:2px;
+                    background-color:rgb(42, 35, 51);
+                    width: 500px;
+                    height: 110px;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                    text-align:justify;
+                }
+        
+        
+        .sidebar {
+          margin: 0;
+          padding: 0;
+          width: 200px;
+          background-color: #f1f1f1;
+          position: fixed;
+          height: 100%;
+          overflow: auto;
+        }
+        
+        .sidebar a {
+          display: block;
+          color: black;
+          padding: 16px;
+          text-decoration: none;
+        }
+         
+        .sidebar a.active {
+          background-color: #04AA6D;
+          color: white;
+        }
+        
+        .sidebar a:hover:not(.active) {
+          background-color: #555;
+          color: white;
+        }
+        
+        /* .content {
+          margin-left: 245px;
+          padding: 1px 1px;
+          height: 450 px;
+               
+      
+    
+        } */
+        
+        @media screen and (max-width: 700px) {
+          .sidebar {
+            width: 100%;
+            height: auto;
+            position: relative;
+          }
+          .sidebar a {float: left;}
+          div.content {margin-left: 0;}
+        }
+        
+        @media screen and (max-width: 400px) {
+          .sidebar a {
+            text-align: center;
+            float: none;
+          }
+        }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        .card {
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+      width: 40%;
+    }
+    
+    .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+    
+    .container {
+      padding: 2px 16px;
+    }
+    
+    
+        </style>
+<br>
+<br>
+<br>
+<br>
+
+<tab><h2>Results</h2></tab>
+<br>
+<br>
+<tab>
+    {% for result in results %}
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{result.event.img.url}}" alt="Card image cap">
+        <div class="card-body">
+            
+          <h5 class="card-title" style="color: darkgreen;">{{result.event.event_name}}</h5>
+          
+          <p class="card-text"><b>Category : </b>{{result.event.category}}</p>
+          <p class="card-text"><b>Conducted on :</b>{{result.event.startdatetime}}</p>
+          
+          <a href="{{ result.pdf.url }}" class="btn btn-primary">View results</a>
+        </div>
+      </div>
+      {% endfor %}
+          
+
+
+    </tab>
+
+
+{% endblock %}

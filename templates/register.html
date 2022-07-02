@@ -1,0 +1,75 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<link rel="stylesheet" href="{% static 'assets/css/reg.css' %}">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<script>
+  function onlyNumberKey(evt) {
+
+      // Only ASCII charactar in that range allowed
+      var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+      if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+          return false;
+      return true;
+  }
+</script>
+
+
+
+<div class="login-page">
+  <div class="container" >
+    {% for message in messages%}
+    <div class="alert alert-success alert-dismissible fade show">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{message}}</strong> 
+    </div>
+    {% endfor %}
+    
+  </div>
+    <div class="form">
+      
+      <form class="login-form" method="POST">
+        <h2 style="font-family:Arial, Helvetica, sans-serif;color:forestgreen;">REGISTER</h2>
+        <br>
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Userame" required autocomplete="off"/>
+        <input type="text" name="student_name" placeholder="Name" required autocomplete="off"/> 
+        <input type="text" name="collegeid" placeholder="College Id" required autocomplete="off"/>
+        <!-- <input type="text" name="dept_name" placeholder="Department"/> -->
+
+
+        <label for="dept_name"  style="width: fit-content;">Department</label>
+        <select style="background-color: rgb(237, 237, 245);" name="dept_name" id="dept_name">
+          {% for Department in Departmentss %}
+          <option name="dept_name" value="{{Department.dept_name}}">{{Department.dept_name}}</option>
+          {% endfor %}
+        </select>
+
+        
+        <input type="Phone" name="phone" placeholder="Phone" maxlength="10" onkeypress="return onlyNumberKey(event)"  required autocomplete="off"/>  
+        <input type="email" name="email" placeholder="Email" required autocomplete="off"/>
+        <input type="password" name="password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters" autocomplete="off"/>
+
+        <button>Register</button>
+        <p class="message">Already have an account? <a href="{% url 'studentlogin' %}">Login</a></p>
+      </form>
+      <br>
+      <!-- {% for message in messages %}
+      <h3 style="color: darkred;">{{message}}</h3>
+      {% endfor %} -->
+    </div>
+  </div>
+{% endblock %}
+

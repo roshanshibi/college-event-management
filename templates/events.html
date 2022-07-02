@@ -1,0 +1,370 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% block additional_styles %}
+
+
+
+<!-- <link rel="stylesheet" href="{% static 'assets/css/moreinfo.css' %}"> -->
+
+<style>
+ 
+
+/* Full-width input fields */
+/* 
+/* Add some hover effects to buttons */
+
+
+
+
+    /* body {
+      margin: 0;
+      font-family: "Lato", sans-serif;
+      background-color: darkgrey;
+      
+    } */
+    body {
+        background: #004d4d; 
+    }
+    div.scroll {
+                margin:4px, 4px;
+                padding:2px;
+                background-color:rgb(42, 35, 51);
+                width: 500px;
+                height: 110px;
+                overflow-x: hidden;
+                overflow-y: auto;
+                text-align:justify;
+            }
+    
+    
+    .sidebar {
+      margin: 0;
+      padding: 0;
+      width: 200px;
+      background-color: #f1f1f1;
+      position: fixed;
+      height: 100%;
+      overflow: auto;
+    }
+    
+    .sidebar a {
+      display: block;
+      color: black;
+      padding: 16px;
+      text-decoration: none;
+    }
+     
+    .sidebar a.active {
+      background-color: #04AA6D;
+      color: white;
+    }
+    
+    .sidebar a:hover:not(.active) {
+      background-color: #555;
+      color: white;
+    }
+    
+    /* .content {
+      margin-left: 245px;
+      padding: 1px 1px;
+      height: 450 px;
+           
+  
+
+    } */
+    
+    @media screen and (max-width: 700px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      .sidebar a {float: left;}
+      div.content {margin-left: 0;}
+    }
+    
+    @media screen and (max-width: 400px) {
+      .sidebar a {
+        text-align: center;
+        float: none;
+      }
+    }
+
+
+
+
+
+
+
+
+
+    .card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+
+    </style>
+
+<script>
+  const myModal = document.getElementById('myModal')
+const myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.mdb.modal', () => {
+  myInput.focus()
+})
+
+
+  	function myFunction() {
+  confirm("Confirm booking? ");
+
+  
+}
+
+
+
+
+</script>
+
+
+
+
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<body>
+<br>
+<br>
+<br>
+<br>
+
+
+<!-- <div class="sidebar">
+  <h2 style="color: snow;  background-color: slategray;">Filter</h2>
+  {% for category1 in categories %}
+    <a href="#home">{{category1.category}}</a>
+
+    {% endfor %}
+  </div> -->
+
+
+
+
+
+
+
+
+
+<div class="container-fluid mt-3">
+  <div class="row">
+
+
+
+    <div class="col-lg-3 mx-auto"  >
+      
+      <div class="sidebar"  >
+        
+
+
+
+
+<div class="scroll" style="height: 720px;width: 200px; border-radius: 5px;">
+			<div class="list-group" >
+        <h2  style="color: cornsilk;font-family:Verdana, Geneva, Tahoma, sans-serif;text-align: center;">FILTER</h2>
+				<a href="?" class="list-group-item list-group-item-action">All Events</a>
+
+				{% for category1 in categories %}
+				<a href="?category1={{category1.id}}"
+					class="list-group-item list-group-item-action">{{category1.category}}</a>
+				{% endfor %}
+      
+			</div>
+      </div>
+    </div>
+ 
+		</div>
+
+
+
+
+
+
+
+
+
+  <br>
+  <div id="events" class="col-lg-9 mx-auto">
+<div class="row mx-auto" >
+
+  <div class="container" >
+    {% for message in messages%}
+    <div class="alert alert-success alert-dismissible fade show">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{message}}</strong> 
+    </div>
+    {% endfor %}
+    
+  </div>
+  {% for evnts in eventss %}
+  <div class="card mx-auto mb-3 " style="width: 18rem;">
+    <img src="{{evnts.img.url}}" class="card-img-top" alt="Card image cap">
+    <div class="card-body">
+      <h3 class="card-title" style="color: darkgreen;"><b>{{evnts.event_name}}</b></h3>
+      <p class="card-text"><b>Category</b> : {{evnts.category}}</p>
+      <p class="card-text"><b>Venue</b> : {{evnts.venue}}</p>
+      <p class="card-text"><b>Date & Time</b> : {{evnts.startdatetime}}</p>
+      <p class="card-text"><b>Hosting Department : </b>{{evnts.dept}}</p>
+      <p class="card-text"><b>Event Head : </b>{{evnts.event_head}}</p>
+      <p class="card-text"><b>Contact  : </b>{{evnts.contact}}</p>
+      <p class="card-text"><b>Registration open until  :</b><b style="color:crimson;border:orange; border-width:5px;"> <br>  {{evnts.regtime}}</b></p>
+
+      <p class="card-text"><b>Amount to be paid:  ₹ </b> {{evnts.price}}</p>
+      <p class="card-text"><b>How many can join : </b> {{evnts.no_of_seats}}</p>
+
+
+      <!-- <p class="card-text"><b>Registrations completed: </b> </p> -->
+      <div class="w3-container">
+        
+        <!-- <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Open Modal</button> -->
+        
+    
+      {% if user.is_authenticated %}
+      <a href="{% url 'booking' evnts.id %}" class="btn btn-primary" onclick="myFunction();" disabled>Join now</a>
+      <!-- <a href=""" class="btn btn-primary" >More Info</a> -->
+  
+     
+
+
+
+      
+      
+      {% else %}
+
+      <a href="{% url 'studentlogin' %}" class="btn btn-primary" onclick="alert('You must login first')">Join now</a>
+      <!-- <a href=""" class="btn btn-primary" >More Info</a> -->
+      
+      {% endif %}
+
+    
+
+
+
+      
+      <a href="{% url 'eventdetails' evnts.id %}" class="btn btn-primary"  >More Info</a>
+      
+      <!-- <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+      
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              
+            </div>
+            <div class="modal-body">l̥
+              <p>{{evnts.description}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div> -->
+
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+    </div>
+    
+     
+
+
+
+
+    </div>
+    
+  </div>
+  {% endfor %}
+
+
+
+  
+ 
+  
+  
+  
+
+</div>
+ </div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+{% endblock %}
+{% endblock %}

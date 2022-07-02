@@ -1,0 +1,47 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<link rel="stylesheet" href="{% static 'assets/css/reg.css' %}">
+
+
+
+<div class="login-page">
+    <div class="form">
+      
+      <form class="login-form" method="POST">
+        <h2 style="font-family:Arial, Helvetica, sans-serif;color:forestgreen;">PROFILE</h2>
+        {% csrf_token %}
+        
+        {% if user.is_authenticated %}
+    
+        <input type="text" name="username" placeholder="{{user.username}}" readonly/>
+        <input type="text" name="student_name" placeholder="{{user.student_name}}" readonly/> 
+        <input type="text" name="collegeid" placeholder="{{user.collegeid}}" readonly/>
+        <!-- <input type="text" name="dept_name" placeholder="Department"/> -->
+
+
+        <label for="dept_name"  style="width: fit-content;">Department</label>
+        <select style="background-color: rgb(237, 237, 245);" name="dept_name" id="dept_name">
+          
+          <option name="dept_name" value="{{Department.dept_name}}" readonly>{{user.dept_name}}</option>
+          
+        </select>
+        
+
+        
+        <input type="number" name="phone" placeholder="{{user.phone}}" readonly/>  
+        <input type="email" name="email" placeholder="{{user.email}}" readonly/>
+        
+        {% else %}
+        {% endif %}
+        
+        
+        
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
